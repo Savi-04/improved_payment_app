@@ -11,7 +11,7 @@ app.use(express.json());
 Connect_db();
 
 
-app.use("/api/v1", mainroute)
+app.use("/api/v1", mainroute);
 
 
 app.listen(port, console.log(`Server is running on port ${port}`)  );
