@@ -96,7 +96,7 @@ async function signUpValidator(req, res){
     
     const newUserAccount = new moneyAccountSchema({
         userId: userId,
-        balance: ((1*Math.random()*1000).toFixed(2))*100.      //
+        balance: ((1*Math.random()*1000).toFixed(2))      //
 
     })
     await newUserAccount.save();

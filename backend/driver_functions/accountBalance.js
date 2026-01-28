@@ -4,19 +4,16 @@ const moneyAccountSchema = require("../configuration/moneyAccountsSchema");
 //function to get the account balance of a user
 
 
-function getBalanceInfo(req, res){
-    const { userId } = req;
-    moneyAccountSchema.findOne({ userId: userId }, (err, account) => {
-        if(err){
-            return res.status(500).json({message: "Error fetching account balance"});
-        }
-        if(!account){
-            return res.status(404).json({message: "Account not found"});
-        }
+async function getBalanceInfo(req, res){
+    const userId = req.userId;
+   const balance = await moneyAccountSchema.findOne({ userId: userId }).select("balance").lean();
+   if(!balance){
+    return res.status(404).json({message: "Account not found"});
+   }
+   return res.status(200).json(balance);
+        
 
-        res.status(200).json({ balance: account.balance });
-    }
-    )
+     
 
 
 }
