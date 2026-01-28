@@ -12,6 +12,8 @@ function App() {
 <div className="text-5xl text-center mt-3.5  text-white">Payment Application</div>
     <BrowserRouter>
     <Routes>
+      <Route path="/" element={<Dashboard />} />   
+
       <Route path="/signup" element={<Signup />} />   
       <Route path="/payment" element={<Payment />} />
       <Route path="/signin" element={<Signin />} />

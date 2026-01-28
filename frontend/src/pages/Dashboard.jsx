@@ -7,18 +7,21 @@ import axios from "axios";
 export function Dashboard() {
 
     const [currentUser, setCurrentUser] = useState({});
-
-    useEffect(() => {
-        axios.get("http://localhost:3000/api/v1/user-info", {
+//below code has become messy because I wanted to fetch using async await inside useEffect
+    useEffect(() => {  
+        
+        async function fetchUserData() {
+        const response = await axios.get("http://localhost:3000/api/v1/user-info", {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
-        }).then((response) => {
-            // const {otherDetails} = response.data;
-            setCurrentUser(response.data);
-            console.log(currentUser.balance);
         })
-    }, []);
+        if(response && response.data){
+            setCurrentUser(response.data);
+        }
+    }
+    fetchUserData();
+},[]);
     return <div>
 hola
     <TopBar currentUser={currentUser.otherDetails} />
