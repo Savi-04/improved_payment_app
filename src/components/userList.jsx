@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import { Pagination } from "./pagination";
+import { API_URL } from "../config";
 
 
 export function UserList({ currentUser }) {
@@ -16,8 +17,10 @@ export function UserList({ currentUser }) {
     // const {filter, setFilter} = useState("");
     const usersPerPage = 5; //number of users to show per page in pagination
 
+
+
     useEffect(() => {
-        axios.get("http://localhost:3000/api/v1/listUsers", {
+        axios.get(`${API_URL}/api/v1/listUsers`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }

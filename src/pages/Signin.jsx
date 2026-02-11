@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { API_URL } from "../config";
 
 export function Signin() {
     const Navigate = useNavigate();
@@ -21,9 +22,11 @@ export function Signin() {
         });
     }
 
+
+
     async function SigninHandler() {
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/signin", formData);
+            const response = await axios.post(`${API_URL}/api/v1/signin`, formData);
             localStorage.setItem("token", response.data.token);
             toast.success("Signed in successfully!");
             Navigate("/dashboard");

@@ -3,15 +3,17 @@ import { Balance } from "../components/balance";
 import { UserList } from "../components/userList";
 import { use, useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 
 export function Dashboard() {
 
     const [currentUser, setCurrentUser] = useState({});
+
     //below code has become messy because I wanted to fetch using async await inside useEffect
     useEffect(() => {
 
         async function fetchUserData() {
-            const response = await axios.get("http://localhost:3000/api/v1/user-info", {
+            const response = await axios.get(`${API_URL}/api/v1/user-info`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }

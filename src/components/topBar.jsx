@@ -11,7 +11,7 @@ export function TopBar({ currentUser }) {
     return (
         <div className="flex justify-between items-center bg-white/5 backdrop-blur-md border-b border-white/10 px-6 py-4 sticky top-0 z-50 shadow-lg">
             <div className="text-2xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-blue-400">
-                PAYTM
+                PAYMENT APP
             </div>
             <div className="flex items-center gap-4">
                 <div className="text-right hidden md:block">

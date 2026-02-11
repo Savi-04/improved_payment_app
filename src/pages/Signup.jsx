@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { API_URL } from "../config";
 
 export function Signup() {
     const Navigate = useNavigate();
@@ -23,9 +24,11 @@ export function Signup() {
         });
     }
 
+
+
     async function SignupHandler() {
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/signup", formData);
+            const response = await axios.post(`${API_URL}/api/v1/signup`, formData);
             localStorage.setItem("token", response.data.token);
             toast.success("Account created successfully!");
             Navigate("/dashboard");

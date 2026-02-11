@@ -2,6 +2,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from 'react-toastify';
+import { API_URL } from "../config";
 
 export function Payment() {
     const location = useLocation();
@@ -24,8 +25,10 @@ export function Payment() {
         if (!canPay) return;
         setLoading(true);
 
+
+
         try {
-            await axios.post("http://localhost:3000/api/v1/transfer", {
+            await axios.post(`${API_URL}/api/v1/transfer`, {
                 toAccountId: recipient.userId,
                 amount: Number(willingToPay),
                 userId: currentUser.otherDetails._id
@@ -36,7 +39,7 @@ export function Payment() {
             })
 
             // Fetch updated balance
-            const response = await axios.get("http://localhost:3000/api/v1/user/balance", {
+            const response = await axios.get(`${API_URL}/api/v1/user/balance`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
