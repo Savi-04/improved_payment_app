@@ -7,29 +7,32 @@ import axios from "axios";
 export function Dashboard() {
 
     const [currentUser, setCurrentUser] = useState({});
-//below code has become messy because I wanted to fetch using async await inside useEffect
-    useEffect(() => {  
-        
+    //below code has become messy because I wanted to fetch using async await inside useEffect
+    useEffect(() => {
+
         async function fetchUserData() {
-        const response = await axios.get("http://localhost:3000/api/v1/user-info", {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`
+            const response = await axios.get("http://localhost:3000/api/v1/user-info", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            })
+            if (response && response.data) {
+                setCurrentUser(response.data);
             }
-        })
-        if(response && response.data){
-            setCurrentUser(response.data);
         }
-    }
-    fetchUserData();
-},[]);
-    return <div>
-hola
-    <TopBar currentUser={currentUser.otherDetails} />
-    
+        fetchUserData();
+    }, []);
+    return (
+        <div className="min-h-screen pb-20">
+            <TopBar currentUser={currentUser.otherDetails} />
 
-    <Balance value={currentUser.balance} />
+            <div className="container mx-auto px-4 mt-8 max-w-6xl">
+                <div className="mb-10">
+                    <Balance value={currentUser.balance} />
+                </div>
 
-    <UserList currentUser={currentUser} />
-
-    </div>
+                <UserList currentUser={currentUser} />
+            </div>
+        </div>
+    )
 }

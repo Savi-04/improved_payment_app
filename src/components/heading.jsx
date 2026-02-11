@@ -1,6 +1,5 @@
-export function Heading({title}){
-    return <h1 className="text-3xl font-bold text-center color-blue-500 mt-10">
+export function Heading({ title }) {
+    return <h1 className="text-4xl font-extrabold text-white mb-6 text-center drop-shadow-lg tracking-tight">
         {title}
-        
-        </h1>
+    </h1>
 }
