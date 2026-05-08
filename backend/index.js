@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 const cors = require("cors");
-require('dotenv').config()
+require('dotenv').config();
 
 const corsOptions = {
   origin: [
@@ -17,17 +17,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-const Connect_db = require("./configuration/db");
-const mainroute = require("./middlewares/route");
 app.use(express.json());
 
-Connect_db();
+const Connect_db = require("./configuration/db");
+const mainroute = require("./middlewares/route");
 
+Connect_db()
+  .then(() => console.log("Database connected successfully"))
+  .catch((err) => {
+    console.error("Database connection FAILED:", err.message);
+    process.exit(1);
+  });
 
 app.use("/api/v1", mainroute);
 
-
-app.listen(port, console.log(`Server is running on port ${port}`));
-
-app.use(express.json());
-
+app.listen(port, () => console.log(`Server is running on port ${port}`));
